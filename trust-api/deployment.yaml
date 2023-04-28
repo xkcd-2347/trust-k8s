@@ -1,23 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: trusted-api
   name: trusted-api
+  annotations:
+    image.openshift.io/triggers: |
+      [
+        {
+          "from": {
+            "kind":"ImageStreamTag",
+            "name":"trusted-api:latest"
+          },
+          "fieldPath":"spec.template.spec.containers[?(@.name==\"service\")].image"
+        }
+      ]
+  labels:
+    app.kubernetes.io/name: trusted-api
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: trusted
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trusted-api
+      app.kubernetes.io/name: trusted-api
+      app.kubernetes.io/component: backend
+      app.kubernetes.io/part-of: trusted
   template:
     metadata:
       labels:
-        app: trusted-api
+        app.kubernetes.io/name: trusted-api
+        app.kubernetes.io/component: backend
+        app.kubernetes.io/part-of: trusted
     spec:
       containers:
-        - image: ghcr.io/xkcd-2347/trust-api:latest
+        - image: trusted-api:latest
           imagePullPolicy: Always
-          name: trusted-api
+          name: service
           command: ["/trust-api"]
           args: ["run", "-p", "8080", "-g", "http://guac:8080/query"]
           ports:

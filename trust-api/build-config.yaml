@@ -1,0 +1,21 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: trusted-api
+  labels:
+    app.kubernetes.io/name: trusted-api
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: trusted
+spec:
+  triggers:
+    - type: ImageChange
+  source:
+    git:
+      uri: https://github.com/xkcd-2347/trust-api
+  strategy:
+    dockerStrategy:
+      dockerfilePath: Containerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: trusted-api:latest

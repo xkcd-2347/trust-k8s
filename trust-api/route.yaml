@@ -2,7 +2,9 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   labels:
-    app: trusted-api
+    app.kubernetes.io/name: trusted-api
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: trusted
   name: api
 spec:
   tls:
