@@ -1,0 +1,10 @@
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: guac
+  labels:
+    app.kubernetes.io/name: guac
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: trusted
+spec: {}

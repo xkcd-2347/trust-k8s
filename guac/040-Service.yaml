@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: guac
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: trusted
+  name: guac
+spec:
+  ports:
+  - name: endpoint
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: guac
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: trusted
+  type: ClusterIP
