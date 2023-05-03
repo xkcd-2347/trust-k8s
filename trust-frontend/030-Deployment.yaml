@@ -37,6 +37,9 @@ spec:
         - name: service
           image: console:latest
           imagePullPolicy: Always
+          env:
+            - name: API_URL
+              value: https://api-trusted.apps.sandbox.drogue.world
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
