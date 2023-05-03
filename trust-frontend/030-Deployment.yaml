@@ -37,6 +37,11 @@ spec:
         - name: service
           image: console:latest
           imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           ports:
             - containerPort: 8080
               name: service
@@ -58,3 +63,7 @@ spec:
           emptyDir: {}
         - name: endpoints
           emptyDir: {}
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
