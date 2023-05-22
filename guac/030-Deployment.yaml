@@ -41,7 +41,7 @@ spec:
           command:
             - sh
             - -c
-            - /opt/guac/guacone gql-server --gql-debug
+            - /opt/guac/guacgql --gql-debug
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -61,5 +61,5 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "sleep 5 && curl https://codeload.github.com/xkcd-2347/trust-api/tar.gz/main | tar -xz -C /data --strip=2 trust-api-main/data/files && /opt/guac/guacone files /data"]
+                command: ["/bin/sh", "-c", "sleep 5 && curl https://codeload.github.com/xkcd-2347/trust-api/tar.gz/main | tar -xz -C /data --strip=2 trust-api-main/data/files && /opt/guac/guacone collect files /data"]
 
